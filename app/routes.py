@@ -11,7 +11,6 @@ def home():
 @app.route('/inventory/api', methods=['POST'])
 # @auth.login_required
 def inventory_api():
-    # {'hostname': 'debian-11', 'hostid': '27518fa5e15440aaa3cb6510c78680e6', 'kernel': '5.10.0-21-amd64', 'distro': 'Debian', 'release': 'Debian GNU/Linux 11 (bullseye)', 'version': '11.6', 'host_ip': '192.168.1.63'}
     payload = request.get_json()
     hostname = payload['hostname']
     hostid = payload['hostid']
@@ -38,6 +37,7 @@ def inventory_api():
             host_version=version,
             host_ip=host_ip
         )
+        host.data_cadastro()
         db.session.add(host)
         db.session.commit()
     elif qhostid is not None:

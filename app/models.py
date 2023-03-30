@@ -1,3 +1,4 @@
+from datetime import date
 from flask_login import UserMixin
 from app import db
 
@@ -23,10 +24,14 @@ class Hosts(db.Model):
     host_kernel = db.Column(db.String(45))
     host_version = db.Column(db.String(6))
     host_ip = db.Column(db.String(15))
+    date_cad = db.Column(db.Date)
     updates = db.relationship('Updates', backref='tipo', lazy=True)
 
     def __repr__(self):
         return f"<host: {self.host_name}>"
+
+    def data_cadastro(self):
+        self.date_cad = date.today()
 
 
 class Updates(db.Model):
