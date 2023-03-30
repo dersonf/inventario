@@ -1,0 +1,2 @@
+# inventario
+Servico de inventario
