@@ -1,0 +1,4 @@
+Hello hosts
+{% for host in hosts %}
+    <p>{{ host.host_name }} | {{ host.host_id }} | {{ host.host_distro }} | {{ host.host_release }} | {{ host.host_kernel }} | {{ host.host_version }} | {{ host.host_ip }}</p> 
+{% endfor  %}
