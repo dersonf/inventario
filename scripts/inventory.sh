@@ -13,6 +13,15 @@ if [ ! -z "$TEST_DISTRO" ] ; then
     IP=$(hostname -I | awk {'print $1'})
 fi
 
+TEST_DISTRO=$(grep -i 'Oracle Linux' /etc/*-release)
+
+if [ ! -z "$TEST_DISTRO" ] ; then
+    DISTRO='Oracle Linux'
+    RELEASE=$($GREP PRETTY_NAME /etc/os-release | cut -d '=' -f2 | sed 's/"//g')
+    VERSION=$($GREP VERSION_ID /etc/os-release | cut -d '=' -f2 | sed 's/"//g')
+    IP=$(hostname -I | awk {'print $1'})
+fi
+
 generate_post_data()
 {
   cat <<EOF
@@ -29,4 +38,5 @@ EOF
 }
 
 curl -H "Content-Type:application/json" -X POST -d "$(generate_post_data)" http://$SERVER_IP:5000/inventory/api
+
 

@@ -25,6 +25,7 @@ class Hosts(db.Model):
     host_version = db.Column(db.String(6))
     host_ip = db.Column(db.String(15))
     date_cad = db.Column(db.Date)
+    date_mod = db.Column(db.Date)
     updates = db.relationship('Updates', backref='tipo', lazy=True)
 
     def __repr__(self):
@@ -33,6 +34,8 @@ class Hosts(db.Model):
     def data_cadastro(self):
         self.date_cad = date.today()
 
+    def data_update(self):
+        self.date_mod = date.today()
 
 class Updates(db.Model):
     """Tabela que armazena as atualizações"""
